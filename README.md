@@ -16,4 +16,4 @@
 9.git branch dev    ----创建分支  |  git checkout dev    ----切换分支  |  git branch    ----查看分支是否创建
 10.git add filname/add .    ----提交文件  |  git checout master    ----切换到主分支合并
 11.git merge dev    ----合并分支
-12.git push origin master    ----上传到远端  |  git branch -D dev    ----删除分支
+12.git push origin master    ----上传到远端  |  git branch -D dev    ----删除分支 
