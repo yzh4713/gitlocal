@@ -1,0 +1,53 @@
+1.创建web工程
+2.添加jar包：
+	1.spring+springmvc  jar
+	2.mybatis的jar + mybatis——spring的整合jar
+	3.数据驱动的jar
+	4.日期jar
+3.配置文件：
+	3.1.spring的核心文件配置：
+		applicationContext.xml
+			1.注解扫描配置
+			2.数据连接池配置---c3p0
+				1.引入db.properties文件-----》添加db.properties文件
+				2.配置dataSource连接池
+					1.配置连接池属性
+			3.配置sqlSessionFactory工厂----mybatis-spring
+				配置sqlSessionFactory属性
+					1.配置mybatis核心文件SqlMapConfig.xml-----》添加SqlMapConfig.xml
+					2.配置dataSource数据源				
+			4.mapper代理开发的配置（mapper的id首字母小写）---mybatis-spring
+				配置mapper代理开发属性
+					1.配置mapper接口（每个mapper代理对象的id就是类名，首字母小写）
+	3.2.mybatis的核心文件配置：
+		SqlMapConfig.xml
+			配置一个bean包的内容的别名即可typeAliases
+	3.3.springMvc的文件配置：
+		springmvc.xml
+			handlerMapping---处理器映射器(未设置会自动加载)
+			handlerAdapter---处理器适配器(未设置会自动加载)
+			视图解析器----去掉jsp的前缀与后缀
+				属性名称prefix  前缀
+				属性名称suffix  后缀
+4.添加log4j.properties
+5.web.xml加载配置文件
+	5.1.监听器listener -- 可以让spring容器随项目的启动而创建,随项目的关闭而销毁 
+	5.2.加载applicationContext.xml文件-----context-param
+	5.3.配置前端控制器dispacherServlet----springmvc最核心控制器---servlet
+		指定加载springmvc配置文件-----init-param
+	5.4.映射前端控制器----servlet-mapping
+	5.5.解决post请求乱码配置
+		<filter>
+			<filter-name>encoding</filter-name>
+			<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+			<!-- 设置编码参是UTF8 -->
+			<init-param>
+				<param-name>encoding</param-name>
+				<param-value>UTF-8</param-value>
+			</init-param>
+		</filter>
+		<filter-mapping>
+			<filter-name>encoding</filter-name>
+			<url-pattern>/*</url-pattern>
+		</filter-mapping>
+			
