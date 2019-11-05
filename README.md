@@ -7,6 +7,9 @@
 3.git add .    ----提交本地仓库全部目录
 4.git add filename    ----提交指定文件/目录
 5.git status    ----查看状态
+
+git commit -m '描述'
+
 6.连接远端库(通过ssh加密传输，需设置)
     查看C盘用户目录下C:\Users\PCyzh\.ssh是否有这个目录有无id_rsa(私钥)和id_rsa.pub(公钥)这两个文件，没有就创建
     ssh-keygen -t rsa -C "yzhemail@vip.qq.com"    ----创建命令
