@@ -1,3 +1,15 @@
-1.javabean存在有参构造  必须有无参构造
+# tomcat缓存清理
+1.进入tomcat/bin目录下，执行sh shutdown.sh命令关闭tomcat。
+2.然后执行命令 ps -aux | grep tomcat 命令​，查看tomcat命令是否真的关闭
+3.如果没有关闭执行 kill -9 #pid 来彻底关闭tomcat（#pid是tomcat的进程ID）​
+root    17505    0.0        0.0    63344  768    pts/1    S+  10:22  0:00 grep tomcat​
+USER    PID    %CPU  %MEM  VSZ  RSS    TTY  STAT  START TIME COMMAND​
+4.最后进入tomcat/work目录下​，执行 rm -rf Catalina 来删除缓存文件
+5.执行ls ​确认是否删除，如果work目录下没有Catalina文件夹说明删除成功。
+6.在进入tomcat/bin目录下，执行./startup.sh命令来重启tomcat。
+
+7.freeswitch 修改conf/autoload_configs/xml_cdr.conf.xml
+8.修改之后需运行fs_cli -x "reload mod_xml_cdr"来加载mod_xml_cdr
+9.打电话挂断后http服务就会收到xml的输出
 
 2.包装类  sql 值 必须用   包装属性bean.    ------  jsp 页面 属性名 也必须 用  包装属性bean.

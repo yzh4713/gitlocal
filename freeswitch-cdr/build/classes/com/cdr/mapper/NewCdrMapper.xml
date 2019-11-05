@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cdr.mapper.NewCdrMapper" >
+  <resultMap id="BaseResultMap" type="com.cdr.bean.NewCdr" >
+    <id column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="ani" property="ani" jdbcType="VARCHAR" />
+    <result column="dnis" property="dnis" jdbcType="VARCHAR" />
+    <result column="call_type" property="callType" jdbcType="INTEGER" />
+    <result column="call_duraling" property="callDuraling" jdbcType="INTEGER" />
+    <result column="start_stamp" property="startStamp" jdbcType="TIMESTAMP" />
+    <result column="end_stamp" property="endStamp" jdbcType="TIMESTAMP" />
+    <result column="answer_epoch" property="answerEpoch" jdbcType="INTEGER" />
+    <result column="start_epoch" property="startEpoch" jdbcType="INTEGER" />
+    <result column="end_epoch" property="endEpoch" jdbcType="INTEGER" />
+    <result column="creat_time" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="value1" property="value1" jdbcType="VARCHAR" />
+    <result column="value2" property="value2" jdbcType="VARCHAR" />
+    <result column="value3" property="value3" jdbcType="VARCHAR" />
+    <result column="value4" property="value4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uuid, ani, dnis, call_type, call_duraling, start_stamp, end_stamp, answer_epoch, 
+    start_epoch, end_epoch, creat_time, update_time, value1, value2, value3, value4
+  </sql>
+ 
+ 
+  <insert id="insert" parameterType="com.cdr.bean.NewCdr" >
+    insert into new_cdr (uuid, ani, dnis, 
+      call_type, call_duraling, start_stamp, 
+      end_stamp, answer_epoch, start_epoch, 
+      end_epoch, creat_time, update_time, 
+      value1, value2, value3, 
+      value4)
+    values (#{uuid,jdbcType=VARCHAR}, #{ani,jdbcType=VARCHAR}, #{dnis,jdbcType=VARCHAR}, 
+      #{callType,jdbcType=INTEGER}, #{callDuraling,jdbcType=INTEGER}, #{startStamp,jdbcType=TIMESTAMP}, 
+      #{endStamp,jdbcType=TIMESTAMP}, #{answerEpoch,jdbcType=INTEGER}, #{startEpoch,jdbcType=INTEGER}, 
+      #{endEpoch,jdbcType=INTEGER}, #{creatTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{value1,jdbcType=VARCHAR}, #{value2,jdbcType=VARCHAR}, #{value3,jdbcType=VARCHAR}, 
+      #{value4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cdr.bean.NewCdr" >
+    insert into new_cdr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="ani != null" >
+        ani,
+      </if>
+      <if test="dnis != null" >
+        dnis,
+      </if>
+      <if test="callType != null" >
+        call_type,
+      </if>
+      <if test="callDuraling != null" >
+        call_duraling,
+      </if>
+      <if test="startStamp != null" >
+        start_stamp,
+      </if>
+      <if test="endStamp != null" >
+        end_stamp,
+      </if>
+      <if test="answerEpoch != null" >
+        answer_epoch,
+      </if>
+      <if test="startEpoch != null" >
+        start_epoch,
+      </if>
+      <if test="endEpoch != null" >
+        end_epoch,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="value1 != null" >
+        value1,
+      </if>
+      <if test="value2 != null" >
+        value2,
+      </if>
+      <if test="value3 != null" >
+        value3,
+      </if>
+      <if test="value4 != null" >
+        value4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="ani != null" >
+        #{ani,jdbcType=VARCHAR},
+      </if>
+      <if test="dnis != null" >
+        #{dnis,jdbcType=VARCHAR},
+      </if>
+      <if test="callType != null" >
+        #{callType,jdbcType=INTEGER},
+      </if>
+      <if test="callDuraling != null" >
+        #{callDuraling,jdbcType=INTEGER},
+      </if>
+      <if test="startStamp != null" >
+        #{startStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endStamp != null" >
+        #{endStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answerEpoch != null" >
+        #{answerEpoch,jdbcType=INTEGER},
+      </if>
+      <if test="startEpoch != null" >
+        #{startEpoch,jdbcType=INTEGER},
+      </if>
+      <if test="endEpoch != null" >
+        #{endEpoch,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value1 != null" >
+        #{value1,jdbcType=VARCHAR},
+      </if>
+      <if test="value2 != null" >
+        #{value2,jdbcType=VARCHAR},
+      </if>
+      <if test="value3 != null" >
+        #{value3,jdbcType=VARCHAR},
+      </if>
+      <if test="value4 != null" >
+        #{value4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update new_cdr
+    <set >
+      <if test="record.uuid != null" >
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ani != null" >
+        ani = #{record.ani,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dnis != null" >
+        dnis = #{record.dnis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.callType != null" >
+        call_type = #{record.callType,jdbcType=INTEGER},
+      </if>
+      <if test="record.callDuraling != null" >
+        call_duraling = #{record.callDuraling,jdbcType=INTEGER},
+      </if>
+      <if test="record.startStamp != null" >
+        start_stamp = #{record.startStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endStamp != null" >
+        end_stamp = #{record.endStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.answerEpoch != null" >
+        answer_epoch = #{record.answerEpoch,jdbcType=INTEGER},
+      </if>
+      <if test="record.startEpoch != null" >
+        start_epoch = #{record.startEpoch,jdbcType=INTEGER},
+      </if>
+      <if test="record.endEpoch != null" >
+        end_epoch = #{record.endEpoch,jdbcType=INTEGER},
+      </if>
+      <if test="record.creatTime != null" >
+        creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.value1 != null" >
+        value1 = #{record.value1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value2 != null" >
+        value2 = #{record.value2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value3 != null" >
+        value3 = #{record.value3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.value4 != null" >
+        value4 = #{record.value4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update new_cdr
+    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      ani = #{record.ani,jdbcType=VARCHAR},
+      dnis = #{record.dnis,jdbcType=VARCHAR},
+      call_type = #{record.callType,jdbcType=INTEGER},
+      call_duraling = #{record.callDuraling,jdbcType=INTEGER},
+      start_stamp = #{record.startStamp,jdbcType=TIMESTAMP},
+      end_stamp = #{record.endStamp,jdbcType=TIMESTAMP},
+      answer_epoch = #{record.answerEpoch,jdbcType=INTEGER},
+      start_epoch = #{record.startEpoch,jdbcType=INTEGER},
+      end_epoch = #{record.endEpoch,jdbcType=INTEGER},
+      creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      value1 = #{record.value1,jdbcType=VARCHAR},
+      value2 = #{record.value2,jdbcType=VARCHAR},
+      value3 = #{record.value3,jdbcType=VARCHAR},
+      value4 = #{record.value4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cdr.bean.NewCdr" >
+    update new_cdr
+    <set >
+      <if test="ani != null" >
+        ani = #{ani,jdbcType=VARCHAR},
+      </if>
+      <if test="dnis != null" >
+        dnis = #{dnis,jdbcType=VARCHAR},
+      </if>
+      <if test="callType != null" >
+        call_type = #{callType,jdbcType=INTEGER},
+      </if>
+      <if test="callDuraling != null" >
+        call_duraling = #{callDuraling,jdbcType=INTEGER},
+      </if>
+      <if test="startStamp != null" >
+        start_stamp = #{startStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endStamp != null" >
+        end_stamp = #{endStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answerEpoch != null" >
+        answer_epoch = #{answerEpoch,jdbcType=INTEGER},
+      </if>
+      <if test="startEpoch != null" >
+        start_epoch = #{startEpoch,jdbcType=INTEGER},
+      </if>
+      <if test="endEpoch != null" >
+        end_epoch = #{endEpoch,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="value1 != null" >
+        value1 = #{value1,jdbcType=VARCHAR},
+      </if>
+      <if test="value2 != null" >
+        value2 = #{value2,jdbcType=VARCHAR},
+      </if>
+      <if test="value3 != null" >
+        value3 = #{value3,jdbcType=VARCHAR},
+      </if>
+      <if test="value4 != null" >
+        value4 = #{value4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cdr.bean.NewCdr" >
+    update new_cdr
+    set ani = #{ani,jdbcType=VARCHAR},
+      dnis = #{dnis,jdbcType=VARCHAR},
+      call_type = #{callType,jdbcType=INTEGER},
+      call_duraling = #{callDuraling,jdbcType=INTEGER},
+      start_stamp = #{startStamp,jdbcType=TIMESTAMP},
+      end_stamp = #{endStamp,jdbcType=TIMESTAMP},
+      answer_epoch = #{answerEpoch,jdbcType=INTEGER},
+      start_epoch = #{startEpoch,jdbcType=INTEGER},
+      end_epoch = #{endEpoch,jdbcType=INTEGER},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      value1 = #{value1,jdbcType=VARCHAR},
+      value2 = #{value2,jdbcType=VARCHAR},
+      value3 = #{value3,jdbcType=VARCHAR},
+      value4 = #{value4,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

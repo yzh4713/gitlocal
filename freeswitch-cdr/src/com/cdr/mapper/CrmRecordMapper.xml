@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdr.mapper.CrmRecordMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cdr.mapper.CrmRecordMapper">
+		<id column="record_id" property="recordId" jdbcType="VARCHAR" />
+		<result column="tenant_id" property="tenantId"
+			jdbcType="VARCHAR" />
+		<result column="user_code" property="userCode"
+			jdbcType="VARCHAR" />
+		<result column="organ_id" property="organId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime"
+			jdbcType="TIMESTAMP" />
+		<result column="agent_id" property="agentId" jdbcType="VARCHAR" />
+		<result column="platform_type" property="platformType"
+			jdbcType="VARCHAR" />
+		<result column="record_platform_id" property="recordPlatformId"
+			jdbcType="VARCHAR" />
+		<result column="service_id" property="serviceId"
+			jdbcType="VARCHAR" />
+		<result column="call_id" property="callId" jdbcType="VARCHAR" />
+		<result column="connect_time" property="connectTime"
+			jdbcType="TIMESTAMP" />
+		<result column="dnis" property="dnis" jdbcType="VARCHAR" />
+		<result column="ani" property="ani" jdbcType="VARCHAR" />
+		<result column="customer_id" property="customerId"
+			jdbcType="VARCHAR" />
+		<result column="call_type" property="callType"
+			jdbcType="TINYINT" />
+		<result column="disconnect_time" property="disconnectTime"
+			jdbcType="TIMESTAMP" />
+		<result column="recordduration" property="recordduration"
+			jdbcType="BIGINT" />
+		<result column="origin_uuid" property="originUuid"
+			jdbcType="VARCHAR" />
+		<result column="uuid" property="uuid" jdbcType="VARCHAR" />
+		<result column="phone_status" property="phoneStatus"
+			jdbcType="VARCHAR" />
+		<result column="phone_platform" property="phonePlatform"
+			jdbcType="VARCHAR" />
+		<result column="serv_id" property="servId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 插入话但数据 -->
+	<insert id="insert" parameterType="crmrecord">
+		<if test="updateTime == createTime">
+			insert into crm_record (record_id, tenant_id, user_code,
+			organ_id, user_id, create_time,
+			agent_id, platform_type, record_platform_id,
+			service_id, call_id, connect_time,
+			dnis, ani, customer_id,
+			call_type, disconnect_time, recordduration,
+			origin_uuid, uuid, phone_status,
+			phone_platform, serv_id)
+			values (#{recordId,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR},
+			#{userCode,jdbcType=VARCHAR},
+			#{organId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+			#{agentId,jdbcType=VARCHAR}, #{platformType,jdbcType=VARCHAR},
+			#{recordPlatformId,jdbcType=VARCHAR},
+			#{serviceId,jdbcType=VARCHAR}, #{callId,jdbcType=VARCHAR}, #{connectTime,jdbcType=TIMESTAMP},
+			#{dnis,jdbcType=VARCHAR}, #{ani,jdbcType=VARCHAR},
+			#{customerId,jdbcType=VARCHAR},
+			#{callType,jdbcType=TINYINT}, #{disconnectTime,jdbcType=TIMESTAMP},
+			#{recordduration,jdbcType=BIGINT},
+			#{originUuid,jdbcType=VARCHAR}, #{uuid,jdbcType=VARCHAR}, #{phoneStatus,jdbcType=VARCHAR},
+			#{phonePlatform,jdbcType=VARCHAR}, #{servId,jdbcType=VARCHAR})
+		</if>
+	</insert>
+
+</mapper>

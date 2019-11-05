@@ -3,7 +3,6 @@ package com.cdr.controller;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,9 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cdr.bean.CallDetail;
-import com.cdr.bean.NewCdr;
-import com.cdr.service.CallDetailService;
+import com.cdr.bean.CrmRecord;
+import com.cdr.mapper.CrmRecordMapper;
 import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
 /**
@@ -36,14 +34,15 @@ import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
  */
 
 @Controller
-public class NewRead {
+@RequestMapping("/crm")
+public class CrmRecordController {
 
-	protected static Logger log = LoggerFactory.getLogger(NewRead.class.getName());
+	protected static Logger log = LoggerFactory.getLogger(CrmRecordController.class.getName());
 
 	@Autowired
-	private CallDetailService callservcie;
+	private CrmRecordMapper crmService;
 
-	@RequestMapping("/insert")
+	@RequestMapping("/read")
 	public void getDocument(HttpServletRequest req,HttpServletResponse resp) throws Exception {
 
 		System.out.println("接受话单数据并解析插入数据库");
@@ -56,23 +55,13 @@ public class NewRead {
 		List<Element> elementList = null;
 
 		try {
-			System.out.println("拿到uuid："+req.getParameter("uuid"));
 			ins = req.getInputStream();
-			String type = req.getContentType();
-			System.out.println("内容类型："+type);
 			
+
 			sr = new SAXReader();
 			doc = sr.read(ins);
-			
 			String xmlStr = doc.asXML();
-			xmlStr.substring(4, xmlStr.length()-4);
-			
-			//把获取的xml参数，生成本地文件
-			Found_LocalFile localFile = new Found_LocalFile();
-			localFile.AppendWriteFile("C:\\Users\\PCyzh\\Desktop\\kun\\cdr2019110101.xml", xmlStr);
-			
-//			log.error("错误信息："+xmlStr);
-			System.out.println("获取xml字符串" + xmlStr);
+//			System.out.println("获取xml字符串" + xmlStr);
 //			log.warn("好差。。" + xmlStr);
 
 			ByteInputStream bis = new ByteInputStream();
@@ -87,8 +76,8 @@ public class NewRead {
 				System.out.println("根节点下面的节点：" + eroot.getName());
 			}
 
-			CallDetail call = new CallDetail();
-			NewCdr cdr = new NewCdr();
+			CrmRecord crm = new CrmRecord();
+			
 			boolean insert;
 			if (elementList.size() > 1) {// 判断是否存在子节点
 				String node;
@@ -98,14 +87,33 @@ public class NewRead {
 						for (Iterator i = root.elementIterator("variables"); i.hasNext();) {
 							foo = (Element) i.next();
 							System.out.println("唯一id:" + foo.elementText("uuid"));
-							call.setUuid(foo.elementText("uuid")); //
-							call.setAniName(foo.elementText("sip_auth_username"));
-							call.setAniNumber(foo.elementText("sip_number_alias"));
-							call.setDnisNumber(foo.elementText("sip_to_user"));
-							call.setCreateTime(new Date());
-							call.setUpdateTime(new Date());
+							crm.setUuid(foo.elementText("uuid")); //
+							crm.setRecordId("");
+							crm.setTenantId(foo.elementText("tenantid"));
+							crm.setTenantId(foo.elementText("userCode"));
+							crm.setTenantId(foo.elementText("organId"));
+							crm.setTenantId(foo.elementText("userId"));
+							crm.setTenantId(foo.elementText("createTime"));
+							crm.setTenantId(foo.elementText("agentId"));
+							crm.setTenantId(foo.elementText("platformType"));
+							crm.setTenantId(foo.elementText("recordPlatformId"));
+							crm.setTenantId(foo.elementText("serviceId"));
+							crm.setTenantId(foo.elementText("callId"));
+							crm.setTenantId(foo.elementText("connectTime"));
+							crm.setTenantId(foo.elementText("dnis"));
+							crm.setTenantId(foo.elementText("ani"));
+							crm.setTenantId(foo.elementText("customerId"));
+							crm.setTenantId(foo.elementText("callType"));
+							crm.setTenantId(foo.elementText("disconnectTime"));
+							crm.setTenantId(foo.elementText("recordduration"));
+							crm.setTenantId(foo.elementText("originUuid"));
+							crm.setTenantId(foo.elementText("uuid"));
+							crm.setTenantId(foo.elementText("phoneStatus"));
+							crm.setTenantId(foo.elementText("phonePlatform"));
+							crm.setTenantId(foo.elementText("servId"));
 							
-							insert = callservcie.insert(call);
+							
+							insert = crmService.insert(crm);
 							if(insert=true) {
 								resp.setStatus(200);
 								resp.setCharacterEncoding("utf-8");
@@ -147,11 +155,6 @@ public class NewRead {
 				e1.printStackTrace();
 			}
 		}
-	}
-
-	private Date Date(String elementText) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 
